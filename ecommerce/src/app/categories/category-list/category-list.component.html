@@ -1,0 +1,31 @@
+<div class="container">
+  <h2>Liste des Catégories</h2>
+  
+  <a routerLink="/categories/add" class="btn btn-add">+ Ajouter une catégorie</a>
+  
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Nom</th>
+        <th>Description</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (category of categories; track category.id) {
+        <tr>
+          <td>{{ category.name }}</td>
+          <td>{{ category.description }}</td>
+          <td class="actions">
+            <a [routerLink]="['/categories/edit', category.id]" class="btn btn-edit">Modifier</a>
+            <button (click)="deleteCategory(category.id!)" class="btn btn-delete">Supprimer</button>
+          </td>
+        </tr>
+      }
+    </tbody>
+  </table>
+  
+  @if (categories.length === 0) {
+    <p class="no-data">Aucune catégorie trouvée</p>
+  }
+</div>

@@ -1,0 +1,35 @@
+<div class="container">
+  <h2>Liste des Produits</h2>
+  
+  <a routerLink="/products/add" class="btn btn-add">+ Ajouter un produit</a>
+  
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Nom</th>
+        <th>Prix (MAD)</th>
+        <th>Stock</th>
+        <th>Catégorie</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (product of products; track product.id) {
+        <tr>
+          <td>{{ product.name }}</td>
+          <td>{{ product.price | number:'1.2-2' }} MAD</td>
+          <td>{{ product.stock }}</td>
+          <td>{{ product.category?.name || 'N/A' }}</td>
+          <td class="actions">
+            <a [routerLink]="['/products/edit', product.id]" class="btn btn-edit">Modifier</a>
+            <button (click)="deleteProduct(product.id!)" class="btn btn-delete">Supprimer</button>
+          </td>
+        </tr>
+      }
+    </tbody>
+  </table>
+  
+  @if (products.length === 0) {
+    <p class="no-data">Aucun produit trouvé</p>
+  }
+</div>

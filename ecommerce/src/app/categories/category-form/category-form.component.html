@@ -1,0 +1,39 @@
+<div class="container">
+  <h2>{{ isEditMode ? 'Modifier' : 'Ajouter' }} une Catégorie</h2>
+  
+  <form (ngSubmit)="onSubmit()" #categoryForm="ngForm">
+    <div class="form-group">
+      <label for="name">Nom *</label>
+      <input 
+        type="text" 
+        id="name" 
+        name="name" 
+        [(ngModel)]="category.name" 
+        required 
+        #nameInput="ngModel"
+        class="form-control"
+      >
+      @if (nameInput.invalid && nameInput.touched) {
+        <span class="error">Le nom est obligatoire</span>
+      }
+    </div>
+    
+    <div class="form-group">
+      <label for="description">Description</label>
+      <textarea 
+        id="description" 
+        name="description" 
+        [(ngModel)]="category.description" 
+        class="form-control"
+        rows="3"
+      ></textarea>
+    </div>
+    
+    <div class="form-actions">
+      <button type="submit" class="btn btn-save" [disabled]="categoryForm.invalid">
+        {{ isEditMode ? 'Modifier' : 'Ajouter' }}
+      </button>
+      <a routerLink="/categories" class="btn btn-cancel">Annuler</a>
+    </div>
+  </form>
+</div>
